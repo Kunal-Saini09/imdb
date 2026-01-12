@@ -2,7 +2,7 @@ import { Webhook } from 'svix';
 
 const webhookSecret = process.env.WEBHOOK_SECRET;
 
-export async function POST(req) {
+export async function GET(req) {
     try {
         const payload = await req.text();
         const headers = {
