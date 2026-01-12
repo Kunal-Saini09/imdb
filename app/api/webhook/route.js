@@ -2,7 +2,12 @@ import { Webhook } from 'svix';
 
 const webhookSecret = process.env.WEBHOOK_SECRET;
 
-export async function GET(req) {
+export async function POST(req) {
+    if (!webhookSecret) {
+        console.error('WEBHOOK_SECRET is not set');
+        return Response.json({ message: 'Webhook secret not configured' }, { status: 500 });
+    }
+
     try {
         const payload = await req.text();
         const headers = {
