@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-amber-50: #fffbeb;
+  --color-amber-500: #f99c00;
+  --color-gray-200: #e5e7eb;
+  --color-gray-700: #364153;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+html.dark body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
