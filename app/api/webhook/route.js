@@ -1,13 +1,22 @@
 import { Webhook } from 'svix';
-import { verifyWebhook } from '@clerk/nextjs/webhooks';
+
+const webhookSecret = process.env.WEBHOOK_SECRET;
 
 export async function POST(req) {
     try {
-        const evt = await verifyWebhook(req);
+        const payload = await req.text();
+        const headers = {
+            'svix-id': req.headers.get('svix-id'),
+            'svix-timestamp': req.headers.get('svix-timestamp'),
+            'svix-signature': req.headers.get('svix-signature'),
+        };
 
-        // Do something with payload
+        const wh = new Webhook(webhookSecret);
+        const evt = wh.verify(payload, headers);
+
         const { id } = evt.data;
         const eventType = evt.type;
+        console.log(`Received webhook with ID ${id} and event type of ${eventType}`);
 
         if (eventType === 'user.created') {
             console.log(`New user created with id: ${id}`)
