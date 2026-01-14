@@ -19,6 +19,9 @@ const Navbar = () => {
                 <li className='hidden sm:block'>
                     <Link href={"/"}>Home</Link>
                 </li>
+                <li>
+                    <Link href={"/favorites"}>Favorites</Link>
+                </li>
                 <li className='hidden sm:block'>
                     <Link href={"/about"}>About</Link>
                 </li>
